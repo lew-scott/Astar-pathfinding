@@ -38,8 +38,25 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (!wnd.mouse.IsEmpty())
+	{
+		const auto e = wnd.mouse.Read();
+		if (e.GetType() == Mouse::Event::Type::LPress)
+		{
+			f.onLeftClick(e.GetPos());
+		}
+		else if (e.GetType() == Mouse::Event::Type::RPress)
+		{
+			f.onRightClick(e.GetPos());
+		}
+	}
+	else if (wnd.kbd.KeyIsPressed(VK_SPACE))
+	{
+		f.resetGrid();
+	}
 }
 
 void Game::ComposeFrame()
 {
+	f.drawScene(gfx);
 }
