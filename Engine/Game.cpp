@@ -25,7 +25,9 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd )
+	
 {
+	f.createConnections();
 }
 
 void Game::Go()
@@ -44,10 +46,14 @@ void Game::UpdateModel()
 		if (e.GetType() == Mouse::Event::Type::LPress)
 		{
 			f.onLeftClick(e.GetPos());
+			f.Astar();
+			//f.createPath();
 		}
 		else if (e.GetType() == Mouse::Event::Type::RPress)
 		{
 			f.onRightClick(e.GetPos());
+			f.Astar();
+			//f.createPath();
 		}
 	}
 	else if (wnd.kbd.KeyIsPressed(VK_SPACE))
